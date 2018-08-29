@@ -1,5 +1,12 @@
 const extractCommand = (message = '') => {
-    return message.split('').slice(1, message.length).join('');
+    if (typeof message !== 'string') {
+        return () => {
+            throw Error('TypeError');
+        }
+    }
+
+    const command = message.split(' ').shift();
+    return command.split('').slice(1, command.length).join('');
 }
 
 module.exports = {

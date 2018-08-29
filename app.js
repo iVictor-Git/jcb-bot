@@ -8,12 +8,17 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 
 client.on('ready', () => {
-    console.log(`Logged in as ${client.user.tag}`)
+    console.log('TEST: dev purposes only')
 });
 
 client.on('message', message => {
     // access message content using message.content
-    console.log(message.content)
+    const identifier = message.content.split('')[0]
+
+    // check if identifier === '$'
+    if (identifier === botConfigs.identifier) {
+        console.log(identifier)
+    }
 });
 
 client.login(botConfigs.connectionString);

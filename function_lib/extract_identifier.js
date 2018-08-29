@@ -1,5 +1,5 @@
 const extractIdentifier = (message = '') => {
-    return typeof message === 'string' ? message.length > 0 ? message.split('')[0] : '' : () => {
+    return typeof message === 'string' ? message.length > 0 ? message[0] : '' : () => {
         throw new Error('TypeError')
     }
 }

@@ -20,10 +20,9 @@ client.on('message', message => {
 
     // args[0] would be the identifier if it exists
     if (args[0] === botConfigs.identifier) {
-        const identifier = args[0],
-            command = args[1],
+        const command = args[1],
             arguments = args.slice(2, args.length);
-        console.log(`identifier: ${identifier}, command: ${command}, arguments: ${arguments.join(', ')}`)
+
     }
 
 });

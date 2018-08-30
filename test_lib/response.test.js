@@ -5,10 +5,17 @@ test('given the command hi or hello', () => {
         err: false,
         message: 'hello'
     })
+
     expect(response('hello')).toEqual({
         err: false,
         message: 'hi'
     })
+
+    expect(response('ping')).toEqual({
+        err: false,
+        message: 'pong'
+    })
+
     expect(response('bihh')).toEqual({
         err: true,
         message: 'Invalid command, type $help for help'

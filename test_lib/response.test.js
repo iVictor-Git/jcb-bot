@@ -1,4 +1,6 @@
-const response = require('../function_lib/response').response
+const {
+    response
+} = require('../function_lib/response')
 
 test('given the command hi or hello', () => {
     expect(response('hi')).toEqual({

@@ -22,9 +22,7 @@ client.on('message', message => {
     if (args[0] === botConfigs.identifier) {
         const command = args[1],
             arguments = args.slice(2, args.length);
-
     }
-
 });
 
 client.login(botConfigs.connectionString);

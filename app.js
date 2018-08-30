@@ -21,15 +21,13 @@ client.on('message', message => {
     // args[0] would be the identifier if it exists
     if (args[0] === botConfigs.identifier) {
         const command = args[1],
-            arguments = args.slice(2, args.length);
-
-        const channel = message.channel,
-            channelName = channel.name
+            // arguments = args.slice(2, args.length);
+            channel = message.channel,
+            channelName = channel.name;
 
         // test for bot-stuff
         if (channelName === 'bot-stuff') {
-            // timeout tells how long till we delete the messages
-            const timeout = 5000;
+            // botConfigs.timeout tells how long till we delete the messages
 
             const responseMessage = response(command).message
 
@@ -40,11 +38,19 @@ client.on('message', message => {
                     maxLength: 60
                 }
             }).then(reply => { // then delete the reply and the message
-                reply.delete(timeout)
-                message.delete(timeout)
+                deleteMessage(message, reply)
             }).catch(err => console.log(err)) // log any errors
+        } else {
+            message.reply('This bot is still in testing, please wait until it is officially released').then(reply => {
+                deleteMessage(message, reply)
+            })
         }
     }
 });
+
+const deleteMessage = (message, reply) => {
+    message.delete(botConfigs.timeout)
+    reply.delete(botConfigs.timeout)
+}
 
 client.login(botConfigs.connectionString);

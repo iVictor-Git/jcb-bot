@@ -1,8 +1,6 @@
-const commands = {
-    "hi": "hello",
-    "hello": "hi",
-    "ping": "pong"
-}
+const {
+    commands
+} = require('../.bot.config')
 
 const response = (message = '') => {
     return typeof message !== 'string' ? () => {

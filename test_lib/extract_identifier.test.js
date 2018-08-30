@@ -1,4 +1,6 @@
-const extractIdentifier = require('../function_lib/extract_identifier').extractIdentifier
+const {
+    extractIdentifier
+} = require('../function_lib/extract_identifier')
 
 test('given a string, extract the first character', () => {
     expect(extractIdentifier('$this is the given string')).toBe('$');

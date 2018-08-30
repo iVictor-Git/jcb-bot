@@ -1,8 +1,15 @@
-const splitUpMessage = require('./function_lib/split_up_message').splitUpMessage,
-    response = require('./function_lib/response').response
+const {
+    splitUpMessage
+} = require('./function_lib/split_up_message'), {
+    response
+} = require('./function_lib/response')
 
 // // grab bot configurations
-const botConfigs = require('./.bot.config')
+const {
+    identifier,
+    timeout,
+    connectionString
+} = require('./.bot.config')
 
 // import discord.js
 const Discord = require('discord.js');
@@ -19,15 +26,17 @@ client.on('message', message => {
     const args = splitUpMessage(message.content)
 
     // args[0] would be the identifier if it exists
-    if (args[0] === botConfigs.identifier) {
+    if (args[0] === identifier) {
         const command = args[1],
             // arguments = args.slice(2, args.length);
-            channel = message.channel,
+            {
+                channel
+            } = message,
             channelName = channel.name;
 
         // test for bot-stuff
         if (channelName === 'bot-stuff') {
-            // botConfigs.timeout tells how long till we delete the messages
+            // timeout tells how long till we delete the messages
 
             const responseMessage = response(command).message
 
@@ -49,8 +58,8 @@ client.on('message', message => {
 });
 
 const deleteMessage = (message, reply) => {
-    message.delete(botConfigs.timeout)
-    reply.delete(botConfigs.timeout)
+    message.delete(timeout)
+    reply.delete(timeout)
 }
 
-client.login(botConfigs.connectionString);
+client.login(connectionString);

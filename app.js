@@ -8,7 +8,7 @@ const {
 const {
     identifier,
     timeout,
-    connectionString
+    connectionString,
 } = require('./.bot.config')
 
 // import discord.js
@@ -35,17 +35,16 @@ client.on('message', message => {
             channelName = channel.name;
 
         // test for bot-stuff
-        if (channelName === 'bot-stuff') {
+        if (channelName === 'bot-stuff' || message.guild.name.toLowerCase() === 'victoris') {
             // timeout tells how long till we delete the messages
 
-            const responseMessage = response(command).message
-
-            // reply to the user
-            message.reply(responseMessage, {
+            const responseMessage = typeof response(command).message !== 'function' ? response(command).message : response(command).message()
+            message.reply(responseMessage || "empty string??", {
                 reply: message.author,
                 split: {
                     maxLength: 60
-                }
+                },
+                code: typeof response(command).message !== 'function' ? false : true
             }).then(reply => { // then delete the reply and the message
                 deleteMessage(message, reply)
             }).catch(err => console.log(err)) // log any errors

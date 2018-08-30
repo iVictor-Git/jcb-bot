@@ -1,6 +1,7 @@
 const commands = {
     "hi": "hello",
-    "hello": "hi"
+    "hello": "hi",
+    "ping": "pong"
 }
 
 const response = (message = '') => {

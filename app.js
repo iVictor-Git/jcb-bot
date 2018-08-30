@@ -1,3 +1,5 @@
+const splitUpMessage = require('./function_lib/split_up_message').splitUpMessage
+
 // // grab bot configurations
 const botConfigs = require('./.bot.config')
 
@@ -13,12 +15,17 @@ client.on('ready', () => {
 
 client.on('message', message => {
     // access message content using message.content
-    const identifier = message.content.split('')[0]
 
-    // check if identifier === '$'
-    if (identifier === botConfigs.identifier) {
-        console.log(identifier)
+    const args = splitUpMessage(message.content)
+
+    // args[0] would be the identifier if it exists
+    if (args[0] === botConfigs.identifier) {
+        const identifier = args[0],
+            command = args[1],
+            arguments = args.slice(2, args.length);
+        console.log(`identifier: ${identifier}, command: ${command}, arguments: ${arguments.join(', ')}`)
     }
+
 });
 
 client.login(botConfigs.connectionString);
